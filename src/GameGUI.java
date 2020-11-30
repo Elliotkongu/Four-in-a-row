@@ -19,8 +19,9 @@ public class GameGUI extends JFrame {
     public JLabel p2ScoreCounter = new JLabel();
 
     public JButton showRulesButton = new JButton();
-    public JButton p1ColorButtongroup = new JButton();
-    public JButton p2ColorButtongroup = new JButton();
+
+    public ButtonGroup p1ColorButtongroup = new ButtonGroup();
+    public ButtonGroup p2ColorButtongroup = new ButtonGroup();
 
     public JRadioButton p1Color1 = new JRadioButton();
     public JRadioButton p1Color2 = new JRadioButton();
