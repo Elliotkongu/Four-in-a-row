@@ -65,6 +65,7 @@ public class GameGUI extends JFrame {
 
 
 
+
         southPanel.add(southWestPanel, BorderLayout.WEST);
         southPanel.add(southEastPanel, BorderLayout.EAST);
         southPanel.add(southCenterPanel, BorderLayout.CENTER);
