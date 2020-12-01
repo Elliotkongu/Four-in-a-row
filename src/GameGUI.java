@@ -77,7 +77,6 @@ public class GameGUI extends JFrame {
 
         initiateGameGrid(tileList);
 
-
         setSize(600,600);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -30,7 +30,7 @@ public class GameBoard {
         for(int i = 0; i < ROWS; i++){
             tileList.add(new ArrayList<>());
             for(int j = 0; j < COLUMNS; j++){
-                tileList.get(i).add(new Tile(new Point(j,i), Color.BLACK));
+                tileList.get(i).add(new EmptyTile(new Point(j,i), Color.BLACK));
             }
         }
     }
