@@ -11,13 +11,12 @@ import java.awt.*;
  */
 public class EmptyTile extends Tile {
     public EmptyTile(Point position, Color color) {
-        super(position, color);
+        super(position);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         g.setColor(Color.BLACK);
-
         g.fillOval(0,0,g.getClipBounds().width,g.getClipBounds().height);
     }
 }
