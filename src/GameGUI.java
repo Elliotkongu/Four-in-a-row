@@ -46,8 +46,6 @@ public class GameGUI extends JFrame {
         southPanel.setLayout(new BorderLayout());
         gridPanel.setLayout(new GridLayout(6,7,2,2));
 
-
-
         gridPanel.setBackground(gridColor);
         southEastPanel.setBackground(gridColor);
         southWestPanel.setBackground(gridColor);
@@ -90,7 +88,6 @@ public class GameGUI extends JFrame {
                 gridPanel.add(tile);
             }
         }
-
     }
 
     public void refreshGameGrid (){
