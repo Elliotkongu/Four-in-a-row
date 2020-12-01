@@ -1,4 +1,7 @@
+import Tiles.Tile;
+
 import javax.swing.*;
+import java.util.List;
 import java.awt.*;
 
 /**
@@ -35,7 +38,7 @@ public class GameGUI extends JFrame {
     public JRadioButton p2Color3 = new JRadioButton("Grönt");
 
 
-    public GameGUI (){
+    public GameGUI(List<List<Tile>> tileList){
 
         setLayout(new BorderLayout());
 
@@ -61,21 +64,9 @@ public class GameGUI extends JFrame {
         southCenterPanel.add(showRulesButton);
         southCenterPanel.add(undoButton);
 
-
-
-
-
-
-
         setSize(600,600);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
-    }
-
-    public static void main(String[] args) {
-        GameGUI gg = new GameGUI();
     }
 
     public void refreshGameGrid (){
