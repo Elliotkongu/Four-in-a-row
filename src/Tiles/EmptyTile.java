@@ -10,7 +10,7 @@ import java.awt.*;
  * Copyright: MIT
  */
 public class EmptyTile extends Tile {
-    public EmptyTile(Point position) {
-        super(position);
+    public EmptyTile(Point position, Color color) {
+        super(position, color);
     }
 }
