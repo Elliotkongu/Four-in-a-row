@@ -10,22 +10,14 @@ import java.awt.*;
  * Copyright: MIT
  */
 public class PlayerTile extends Tile{
-    private Color color;
+
     private int player;
 
     public PlayerTile(Point position, Color color, int player) {
-        super(position);
-        this.color = color;
+        super(position,color);
         this.player = player;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
 
     public int getPlayer() {
         return player;

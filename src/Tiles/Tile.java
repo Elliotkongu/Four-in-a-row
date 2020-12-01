@@ -13,8 +13,9 @@ import java.awt.*;
 public class Tile extends JPanel {
     private Point position;
 
-    public Tile(Point position) {
+    public Tile(Point position, Color color) {
         this.position = position;
+        this.setBackground(color);
     }
 
     public Point getPosition() {
@@ -24,4 +25,5 @@ public class Tile extends JPanel {
     public void setPosition(Point position) {
         this.position = position;
     }
+
 }
