@@ -2,10 +2,12 @@ import Tiles.EmptyTile;
 import Tiles.Tile;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameBoard {
+public class GameBoard extends MouseAdapter {
 
     private final int ROWS = 6;
     private final int COLUMNS = 7;
@@ -30,8 +32,18 @@ public class GameBoard {
         for(int i = 0; i < ROWS; i++){
             tileList.add(new ArrayList<>());
             for(int j = 0; j < COLUMNS; j++){
-                tileList.get(i).add(new EmptyTile(new Point(j,i), Color.BLACK));
+                Tile emptyTile = new EmptyTile(new Point(j,i), Color.BLACK);
+                emptyTile.addMouseListener(this);
+                tileList.get(i).add(emptyTile);
             }
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource() instanceof EmptyTile){
+            System.out.println(((EmptyTile) e.getSource()).getPosition());
+
         }
     }
 

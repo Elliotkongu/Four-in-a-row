@@ -2,6 +2,8 @@ import Tiles.EmptyTile;
 import Tiles.Tile;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.*;
 
@@ -12,7 +14,7 @@ import java.awt.*;
  * Project: Four-in-a-row
  * Copyright: MIT
  */
-public class GameGUI extends JFrame {
+public class GameGUI extends JFrame implements ActionListener {
 
     JPanel southPanel = new JPanel();
     JPanel gridPanel = new JPanel();
@@ -94,4 +96,8 @@ public class GameGUI extends JFrame {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
