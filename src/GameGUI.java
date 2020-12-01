@@ -63,10 +63,6 @@ public class GameGUI extends JFrame {
         p2ColorButtongroup.add(p2Color2);
         p2ColorButtongroup.add(p2Color3);
 
-
-
-
-
         southPanel.add(southWestPanel, BorderLayout.WEST);
         southPanel.add(southEastPanel, BorderLayout.EAST);
         southPanel.add(southCenterPanel, BorderLayout.CENTER);
