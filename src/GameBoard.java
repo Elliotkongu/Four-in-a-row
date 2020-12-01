@@ -76,9 +76,9 @@ public class GameBoard extends MouseAdapter {
 
         Tile tile = new PlayerTile(point,color,player);
 
-        for(int i = COLUMNS - 1; i >= 0; i--) {
-            if(tileList.get(i).get(point.y) instanceof EmptyTile){
-                tileList.get(i).set(point.y,tile);
+        for(int i = ROWS - 1; i >= 0; i--) {
+            if(tileList.get(i).get(point.x) instanceof EmptyTile){
+                tileList.get(i).set(point.x,tile);
                 break;
             }
         }
