@@ -1,4 +1,5 @@
 import Tiles.EmptyTile;
+import Tiles.PlayerTile;
 import Tiles.Tile;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ import java.awt.*;
  * Project: Four-in-a-row
  * Copyright: MIT
  */
-public class GameGUI extends JFrame implements ActionListener {
+public class GameGUI extends JFrame {
 
     JPanel southPanel = new JPanel();
     JPanel gridPanel = new JPanel();
@@ -40,13 +41,13 @@ public class GameGUI extends JFrame implements ActionListener {
     public JRadioButton p2Color2 = new JRadioButton("Rosa");
     public JRadioButton p2Color3 = new JRadioButton("Grönt");
 
-    private Color gridColor = new Color(137,207,240);
+    private Color gridColor = new Color(137, 207, 240);
 
-    public GameGUI(List<List<Tile>> tileList){
+    public GameGUI(List<List<Tile>> tileList, ActionListener al) {
 
         setLayout(new BorderLayout());
         southPanel.setLayout(new BorderLayout());
-        gridPanel.setLayout(new GridLayout(6,7,2,2));
+        gridPanel.setLayout(new GridLayout(6, 7, 2, 2));
 
         gridPanel.setBackground(gridColor);
         southEastPanel.setBackground(gridColor);
@@ -79,28 +80,38 @@ public class GameGUI extends JFrame implements ActionListener {
 
         initiateGameGrid(tileList);
 
-        setSize(600,600);
+        showRulesButton.addActionListener(al);
+        undoButton.addActionListener(al);
+
+        p1Color1.addActionListener(al);
+        p1Color2.addActionListener(al);
+        p1Color3.addActionListener(al);
+        p2Color1.addActionListener(al);
+        p2Color2.addActionListener(al);
+        p2Color3.addActionListener(al);
+
+        setSize(600, 600);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void initiateGameGrid(List<List<Tile>> tileList) {
-        refreshGameGrid(tileList);
+        refreshGameGrid(tileList, 2, Color.BLACK);
     }
 
-    public void refreshGameGrid (List<List<Tile>> tileList){
+    public void refreshGameGrid(List<List<Tile>> tileList, int player, Color color) {
         gridPanel.removeAll();
-        for (List<Tile> tileColumn :tileList) {
-            for (Tile tile:tileColumn) {
+        for (List<Tile> tileColumn : tileList) {
+            for (Tile tile : tileColumn) {
                 gridPanel.add(tile);
+                if (tile instanceof PlayerTile) {
+                    if (((PlayerTile) tile).getPlayer() == player) {
+                        ((PlayerTile) tile).setColor(color);
+                    }
+                }
             }
         }
         gridPanel.revalidate();
         gridPanel.repaint();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }

@@ -26,6 +26,13 @@ public class PlayerTile extends Tile{
         g.fillOval(0,0,g.getClipBounds().width,g.getClipBounds().height);
     }
 
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
     public int getPlayer() {
         return player;
