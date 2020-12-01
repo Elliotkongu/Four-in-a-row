@@ -1,6 +1,8 @@
 import Tiles.EmptyTile;
+import Tiles.PlayerTile;
 import Tiles.Tile;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,6 +15,7 @@ public class GameBoard extends MouseAdapter {
     private final int COLUMNS = 7;
 
     private GameGUI gameGUI;
+    private int currentPlayer = 0;
 
     public List<List<Tile>> tileList;
 
@@ -44,10 +47,43 @@ public class GameBoard extends MouseAdapter {
         if(e.getSource() instanceof EmptyTile){
             System.out.println(((EmptyTile) e.getSource()).getPosition());
 
+            placeTile(currentPlayer,((EmptyTile) e.getSource()).getPosition());
+
         }
     }
 
-    public void placeTile(int player, Point point){}
+    public void placeTile(int player, Point point){
+
+        Color color = Color.WHITE;
+
+        if(player == 0){
+            if(gameGUI.p1Color1.isSelected()){
+                color = Color.red;
+            }else if(gameGUI.p1Color2.isSelected()){
+                color = Color.blue;
+            }else if(gameGUI.p1Color3.isSelected()){
+                color = Color.magenta;
+            }
+        }else{
+            if(gameGUI.p2Color1.isSelected()){
+                color = Color.yellow;
+            }else if(gameGUI.p2Color2.isSelected()){
+                color = Color.pink;
+            }else if(gameGUI.p2Color3.isSelected()){
+                color = Color.green;
+            }
+        }
+
+        Tile tile = new PlayerTile(point,color,player);
+
+        for(int i = COLUMNS - 1; i >= 0; i--) {
+            if(tileList.get(i).get(point.y) instanceof EmptyTile){
+                tileList.get(i).set(point.y,tile);
+                break;
+            }
+        }
+        SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList));
+    }
 
     public void calculateVictory(){}
 

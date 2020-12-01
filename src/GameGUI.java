@@ -85,15 +85,18 @@ public class GameGUI extends JFrame implements ActionListener {
     }
 
     private void initiateGameGrid(List<List<Tile>> tileList) {
+        refreshGameGrid(tileList);
+    }
+
+    public void refreshGameGrid (List<List<Tile>> tileList){
+        gridPanel.removeAll();
         for (List<Tile> tileColumn :tileList) {
             for (Tile tile:tileColumn) {
                 gridPanel.add(tile);
             }
         }
-    }
-
-    public void refreshGameGrid (){
-
+        gridPanel.revalidate();
+        gridPanel.repaint();
     }
 
     @Override
