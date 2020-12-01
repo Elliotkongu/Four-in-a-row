@@ -10,7 +10,7 @@ import java.awt.*;
  * Project: Four-in-a-row
  * Copyright: MIT
  */
-public class Tile extends JPanel {
+public abstract class Tile extends JPanel {
     private Point position;
 
     public Tile(Point position, Color color) {
