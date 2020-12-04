@@ -19,4 +19,6 @@ public class EmptyTile extends Tile {
         g.setColor(Color.BLACK);
         g.fillOval(0,0,g.getClipBounds().width,g.getClipBounds().height);
     }
+
+
 }
