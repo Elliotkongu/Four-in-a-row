@@ -26,8 +26,11 @@ public class GameGUI extends JFrame implements ActionListener {
 
     public JLabel scoreLabel = new JLabel();
     public JLabel infoLabel = new JLabel();
-    public JLabel p1ScoreCounter = new JLabel("Spelare 1 : ");
-    public JLabel p2ScoreCounter = new JLabel("Spelare 2: ");
+    public JLabel p1ScoreLabel = new JLabel("SPELARE 1 : ");
+    public JLabel p2ScoreLabel = new JLabel("SPELARE 2: ");
+    public JLabel p1ScoreCounter = new JLabel();
+    public JLabel p2ScoreCounter = new JLabel();
+    public JPanel spacePanel = new JPanel();
 
     public JButton showRulesButton = new JButton("Spelregler");
     public JButton undoButton = new JButton("Ångra");
@@ -57,12 +60,14 @@ public class GameGUI extends JFrame implements ActionListener {
         southCenterPanel.setBackground(gridColor);
         bottomPanel.setBackground(gridColor);
         southPanel.setBackground(gridColor);
+        scorePanel.setBackground(gridColor);
+        spacePanel.setBackground(gridColor);
 
         //add(southPanel, BorderLayout.SOUTH);
         add(bottomPanel, BorderLayout.SOUTH);
         add(gridPanel, BorderLayout.CENTER);
 
-        bottomPanel.add(southWestPanel, BorderLayout.SOUTH);
+        bottomPanel.add(southPanel, BorderLayout.SOUTH);
         bottomPanel.add(scorePanel, BorderLayout.NORTH);
 
         p1ColorButtongroup.add(p1Color1);
@@ -72,7 +77,10 @@ public class GameGUI extends JFrame implements ActionListener {
         p2ColorButtongroup.add(p2Color2);
         p2ColorButtongroup.add(p2Color3);
 
+        scorePanel.add(p1ScoreLabel);
         scorePanel.add(p1ScoreCounter);
+        scorePanel.add(spacePanel);
+        scorePanel.add(p2ScoreLabel);
         scorePanel.add(p2ScoreCounter);
 
         southPanel.add(southWestPanel, BorderLayout.WEST);
