@@ -47,7 +47,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
         if (e.getSource() instanceof EmptyTile) {
             System.out.println(((EmptyTile) e.getSource()).getPosition());
 
