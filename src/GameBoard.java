@@ -24,7 +24,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     public List<List<Tile>> tileList;
 
 
-    public GameBoard(){
+    public GameBoard() {
         initiateTileList();
         initiateGUI();
     }
@@ -36,10 +36,10 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     private void initiateTileList() {
         tileList = new ArrayList<List<Tile>>();
 
-        for(int i = 0; i < ROWS; i++){
+        for (int i = 0; i < ROWS; i++) {
             tileList.add(new ArrayList<>());
-            for(int j = 0; j < COLUMNS; j++){
-                Tile emptyTile = new EmptyTile(new Point(j,i), Color.BLACK);
+            for (int j = 0; j < COLUMNS; j++) {
+                Tile emptyTile = new EmptyTile(new Point(j, i), Color.BLACK);
                 emptyTile.addMouseListener(this);
                 tileList.get(i).add(emptyTile);
             }
@@ -48,34 +48,36 @@ public class GameBoard extends MouseAdapter implements ActionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource() instanceof EmptyTile){
+        if (e.getSource() instanceof EmptyTile) {
             System.out.println(((EmptyTile) e.getSource()).getPosition());
 
-            placeTile(currentPlayer,((EmptyTile) e.getSource()).getPosition());
+            placeTile(currentPlayer, ((EmptyTile) e.getSource()).getPosition());
 
         }
     }
 
-    public void placeTile(int player, Point point){
+    public void placeTile(int player, Point point) {
         Tile tile;
         if (player == 0) {
-            tile = new PlayerTile(point,player1Color,player);
+            tile = new PlayerTile(point, player1Color, player);
         } else {
-            tile = new PlayerTile(point,player2Color,player);
+            tile = new PlayerTile(point, player2Color, player);
         }
 
 
-        for(int i = ROWS - 1; i >= 0; i--) {
-            if(tileList.get(i).get(point.x) instanceof EmptyTile){
-                tileList.get(i).set(point.x,tile);
+        for (int i = ROWS - 1; i >= 0; i--) {
+            if (tileList.get(i).get(point.x) instanceof EmptyTile) {
+                tileList.get(i).set(point.x, tile);
                 break;
             }
         }
         if (player == 0) {
             SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, player, player1Color));
+            calculateVictory(currentPlayer);
             currentPlayer = 1;
         } else {
             SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, player, player2Color));
+            calculateVictory(currentPlayer);
             currentPlayer = 0;
         }
 
@@ -96,15 +98,142 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         } else if (e.getSource() == gameGUI.p2Color1) {
             player2Color = new Color(255, 255, 77);
         } else if (e.getSource() == gameGUI.p2Color2) {
-            player2Color = new Color(245,195,194);
+            player2Color = new Color(245, 195, 194);
         } else if (e.getSource() == gameGUI.p2Color3) {
-            player2Color = new Color(134,194,156);
+            player2Color = new Color(134, 194, 156);
         }
     }
 
-    public void calculateVictory(){}
+    public void calculateVictory(int currentPlayer) {
 
-    public void changeTileColors(int player, Color color){}
+        //horizontal
+        calculateHorizontal(currentPlayer);
+        calculateVertical(currentPlayer);
+        calculateDiagonalSE(currentPlayer);
+        calculateDiagonalSW(currentPlayer);
+    }
+
+    private boolean calculateHorizontal(int player) {
+        int consecutiveTiles;
+        for (int x = 0; x < COLUMNS - 3; x++) {
+            for (int y = 0; y < ROWS; y++) {
+                consecutiveTiles = 0;
+                if (tileList.get(y).get(x) instanceof PlayerTile) {
+
+                    consecutiveTiles++;
+                    for (int i = 1; i < 4; i++) {
+                        if (tileList.get(y).get(x + i) instanceof PlayerTile) {
+                            if (((PlayerTile) tileList.get(y).get(x + i)).getPlayer() == player) {
+                                consecutiveTiles++;
+                            } else {
+                                consecutiveTiles = 0;
+                                break;
+                            }
+                        } else {
+                            consecutiveTiles = 0;
+                            break;
+                        }
+                    }
+                    if (consecutiveTiles == 4) {
+                        //win
+                        System.out.println(player + " vann horisontellt!");
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean calculateVertical(int player) {
+        int consecutiveTiles;
+        for (int x = 0; x < COLUMNS; x++) {
+            for (int y = 0; y < ROWS - 3; y++) {
+                consecutiveTiles = 0;
+                if (tileList.get(y).get(x) instanceof PlayerTile) {
+
+                    consecutiveTiles++;
+                    for (int i = 1; i < 4; i++) {
+                        if (tileList.get(y + i).get(x) instanceof PlayerTile) {
+                            if (((PlayerTile) tileList.get(y + i).get(x)).getPlayer() == player) {
+                                consecutiveTiles++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                    if (consecutiveTiles == 4) {
+                        //win
+                        System.out.println(player + " vann vertikalt!");
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean calculateDiagonalSE(int player) {
+        int consecutiveTiles;
+        for (int x = 0; x < COLUMNS - 3; x++) {
+            for (int y = 0; y < ROWS - 3; y++) {
+                consecutiveTiles = 0;
+                if (tileList.get(y).get(x) instanceof PlayerTile) {
+
+                    consecutiveTiles++;
+                    for (int i = 1; i < 4; i++) {
+                        if (tileList.get(y + i).get(x + i) instanceof PlayerTile) {
+                            if (((PlayerTile) tileList.get(y + i).get(x+i)).getPlayer() == player) {
+                                consecutiveTiles++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                    if (consecutiveTiles == 4) {
+                        //win
+                        System.out.println(player + " vann SE!");
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean calculateDiagonalSW(int player) {
+        int consecutiveTiles;
+        for (int x = 3; x < COLUMNS; x++) {
+            for (int y = 0; y < ROWS - 3; y++) {
+                consecutiveTiles = 0;
+                if (tileList.get(y).get(x) instanceof PlayerTile) {
+
+                    consecutiveTiles++;
+                    for (int i = 1; i < 4; i++) {
+                        if (tileList.get(y + i).get(x - i) instanceof PlayerTile) {
+                            if (((PlayerTile) tileList.get(y + i).get(x-i)).getPlayer() == player) {
+                                consecutiveTiles++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                    if (consecutiveTiles == 4) {
+                        //win
+                        System.out.println(player + " vann SW!");
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         GameBoard gb = new GameBoard();
