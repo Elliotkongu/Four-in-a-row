@@ -21,11 +21,13 @@ public class GameGUI extends JFrame implements ActionListener {
     JPanel southWestPanel = new JPanel();
     JPanel southEastPanel = new JPanel();
     JPanel southCenterPanel = new JPanel();
+    JPanel bottomPanel = new JPanel();
+    JPanel scorePanel = new JPanel();
 
     public JLabel scoreLabel = new JLabel();
     public JLabel infoLabel = new JLabel();
-    public JLabel p1ScoreCounter = new JLabel();
-    public JLabel p2ScoreCounter = new JLabel();
+    public JLabel p1ScoreCounter = new JLabel("Spelare 1 : ");
+    public JLabel p2ScoreCounter = new JLabel("Spelare 2: ");
 
     public JButton showRulesButton = new JButton("Spelregler");
     public JButton undoButton = new JButton("Ångra");
@@ -47,14 +49,21 @@ public class GameGUI extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
         southPanel.setLayout(new BorderLayout());
         gridPanel.setLayout(new GridLayout(6,7,2,2));
+        bottomPanel.setLayout(new BorderLayout());
 
         gridPanel.setBackground(gridColor);
         southEastPanel.setBackground(gridColor);
         southWestPanel.setBackground(gridColor);
         southCenterPanel.setBackground(gridColor);
+        bottomPanel.setBackground(gridColor);
+        southPanel.setBackground(gridColor);
 
-        add(southPanel, BorderLayout.SOUTH);
+        //add(southPanel, BorderLayout.SOUTH);
+        add(bottomPanel, BorderLayout.SOUTH);
         add(gridPanel, BorderLayout.CENTER);
+
+        bottomPanel.add(southWestPanel, BorderLayout.SOUTH);
+        bottomPanel.add(scorePanel, BorderLayout.NORTH);
 
         p1ColorButtongroup.add(p1Color1);
         p1ColorButtongroup.add(p1Color2);
@@ -62,6 +71,9 @@ public class GameGUI extends JFrame implements ActionListener {
         p2ColorButtongroup.add(p2Color1);
         p2ColorButtongroup.add(p2Color2);
         p2ColorButtongroup.add(p2Color3);
+
+        scorePanel.add(p1ScoreCounter);
+        scorePanel.add(p2ScoreCounter);
 
         southPanel.add(southWestPanel, BorderLayout.WEST);
         southPanel.add(southEastPanel, BorderLayout.EAST);
