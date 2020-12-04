@@ -107,10 +107,10 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     public void calculateVictory(int currentPlayer) {
 
         //horizontal
-        calculateHorizontal(currentPlayer);
-        calculateVertical(currentPlayer);
-        calculateDiagonalSE(currentPlayer);
-        calculateDiagonalSW(currentPlayer);
+        if (calculateHorizontal(currentPlayer) || calculateVertical(currentPlayer)
+                || calculateDiagonalSE(currentPlayer) || calculateDiagonalSW(currentPlayer)) {
+
+        }
     }
 
     private boolean calculateHorizontal(int player) {
@@ -118,8 +118,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         for (int x = 0; x < COLUMNS - 3; x++) {
             for (int y = 0; y < ROWS; y++) {
                 consecutiveTiles = 0;
-                if (tileList.get(y).get(x) instanceof PlayerTile) {
-
+                if (tileList.get(y).get(x) instanceof PlayerTile && ((PlayerTile) tileList.get(y).get(x)).getPlayer() == player) {
                     consecutiveTiles++;
                     for (int i = 1; i < 4; i++) {
                         if (tileList.get(y).get(x + i) instanceof PlayerTile) {
@@ -150,7 +149,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         for (int x = 0; x < COLUMNS; x++) {
             for (int y = 0; y < ROWS - 3; y++) {
                 consecutiveTiles = 0;
-                if (tileList.get(y).get(x) instanceof PlayerTile) {
+                if (tileList.get(y).get(x) instanceof PlayerTile && ((PlayerTile) tileList.get(y).get(x)).getPlayer() == player) {
 
                     consecutiveTiles++;
                     for (int i = 1; i < 4; i++) {
@@ -180,12 +179,12 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         for (int x = 0; x < COLUMNS - 3; x++) {
             for (int y = 0; y < ROWS - 3; y++) {
                 consecutiveTiles = 0;
-                if (tileList.get(y).get(x) instanceof PlayerTile) {
+                if (tileList.get(y).get(x) instanceof PlayerTile && ((PlayerTile) tileList.get(y).get(x)).getPlayer() == player) {
 
                     consecutiveTiles++;
                     for (int i = 1; i < 4; i++) {
                         if (tileList.get(y + i).get(x + i) instanceof PlayerTile) {
-                            if (((PlayerTile) tileList.get(y + i).get(x+i)).getPlayer() == player) {
+                            if (((PlayerTile) tileList.get(y + i).get(x + i)).getPlayer() == player) {
                                 consecutiveTiles++;
                             } else {
                                 break;
@@ -210,12 +209,12 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         for (int x = 3; x < COLUMNS; x++) {
             for (int y = 0; y < ROWS - 3; y++) {
                 consecutiveTiles = 0;
-                if (tileList.get(y).get(x) instanceof PlayerTile) {
+                if (tileList.get(y).get(x) instanceof PlayerTile && ((PlayerTile) tileList.get(y).get(x)).getPlayer() == player) {
 
                     consecutiveTiles++;
                     for (int i = 1; i < 4; i++) {
                         if (tileList.get(y + i).get(x - i) instanceof PlayerTile) {
-                            if (((PlayerTile) tileList.get(y + i).get(x-i)).getPlayer() == player) {
+                            if (((PlayerTile) tileList.get(y + i).get(x - i)).getPlayer() == player) {
                                 consecutiveTiles++;
                             } else {
                                 break;
