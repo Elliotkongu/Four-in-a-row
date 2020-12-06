@@ -2,6 +2,7 @@ import Tiles.EmptyTile;
 import Tiles.PlayerTile;
 import Tiles.Tile;
 
+import static javax.swing.JOptionPane.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     private final int COLUMNS = 7;
 
     private GameGUI gameGUI;
-    private int currentPlayer = 0;
+    private int currentPlayer = 1;
     private Color player1Color = Color.WHITE;
     private Color player2Color = Color.WHITE;
 
@@ -71,14 +72,14 @@ public class GameBoard extends MouseAdapter implements ActionListener {
                 break;
             }
         }
-        if (player == 0) {
+        if (player == 1) {
             SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, player, player1Color));
             calculateVictory(currentPlayer);
-            currentPlayer = 1;
+            currentPlayer = 2;
         } else {
             SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, player, player2Color));
             calculateVictory(currentPlayer);
-            currentPlayer = 0;
+            currentPlayer = 1;
         }
 
     }
@@ -86,6 +87,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == gameGUI.showRulesButton) {
+            gameRules();
             System.out.println("Rules have been shown");
         } else if (e.getSource() == gameGUI.undoButton) {
             System.out.println("Undo");
@@ -109,6 +111,8 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         //horizontal
         if (calculateHorizontal(currentPlayer) || calculateVertical(currentPlayer)
                 || calculateDiagonalSE(currentPlayer) || calculateDiagonalSW(currentPlayer)) {
+            showMessageDialog(null, "Spelare " + currentPlayer + " vann!");
+            playAgain();
 
         }
     }
@@ -232,6 +236,24 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             }
         }
         return false;
+    }
+
+    public void gameRules(){
+        showMessageDialog(null, "Spelare turas om att lägga en bricka per spelare.\n" +
+                "När en spelare får fyra brickor i sin egen färg irad, horisontellt, vertikalt eller diagonalt vinner den.\n" +
+                "Om det inte finns lediga platser och ingen har vunnit blir det oavgjort.\n\n" +
+                "Lycka till!", "Spelregler", INFORMATION_MESSAGE);
+    }
+
+    public void playAgain() {
+        int response = showConfirmDialog(null, "Spela igen?", "Rematch", YES_NO_OPTION, QUESTION_MESSAGE);
+
+        if (response == YES_OPTION) {
+            initiateTileList();
+        }
+        else {
+            System.exit(1);
+        }
     }
 
     public static void main(String[] args) {
