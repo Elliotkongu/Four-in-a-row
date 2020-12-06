@@ -21,6 +21,9 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     private Color player1Color = Color.WHITE;
     private Color player2Color = Color.WHITE;
 
+    public int score = 0;
+    GameGUI gameGui;
+
     public List<List<Tile>> tileList;
 
 
@@ -100,7 +103,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         } else if (e.getSource() == gameGUI.p2Color2) {
             player2Color = new Color(245, 195, 194);
         } else if (e.getSource() == gameGUI.p2Color3) {
-            player2Color = new Color(134, 194, 156);
+            player2Color = new Color(11, 134, 55);
         }
     }
 
@@ -110,6 +113,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         if (calculateHorizontal(currentPlayer) || calculateVertical(currentPlayer)
                 || calculateDiagonalSE(currentPlayer) || calculateDiagonalSW(currentPlayer)) {
 
+            winnerPoint(currentPlayer);
         }
     }
 
@@ -232,6 +236,18 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             }
         }
         return false;
+    }
+
+
+    public void winnerPoint (int player){
+        if (player == 0) {
+            score++;
+            gameGUI.p1ScoreCounter.setText(String.valueOf(score));
+        }
+        else {
+            score++;
+            gameGUI.p2ScoreCounter.setText(String.valueOf(score));
+        }
     }
 
     public static void main(String[] args) {

@@ -27,11 +27,14 @@ public class GameGUI extends JFrame{
 
     public JLabel scoreLabel = new JLabel();
     public JLabel infoLabel = new JLabel();
-    public JLabel p1ScoreLabel = new JLabel("SPELARE 1 : ");
-    public JLabel p2ScoreLabel = new JLabel("SPELARE 2: ");
-    public JLabel p1ScoreCounter = new JLabel();
-    public JLabel p2ScoreCounter = new JLabel();
-    public JPanel spacePanel = new JPanel();
+    public JLabel p1ScoreLabel = new JLabel("SPELARE 1 :");
+    public JLabel p2ScoreLabel = new JLabel("SPELARE 2 :");
+    public JLabel p1ScoreCounter = new JLabel("0");
+    public JLabel p2ScoreCounter = new JLabel("0");
+    public JLabel spaceLabel = new JLabel("   -   ");
+
+    Font font1 = new Font("SansSerif", Font.BOLD, 14);
+    Font font2 = new Font("SansSerif", Font.PLAIN, 14);
 
     public JButton showRulesButton = new JButton("Spelregler");
     public JButton undoButton = new JButton("Ångra");
@@ -62,9 +65,7 @@ public class GameGUI extends JFrame{
         bottomPanel.setBackground(gridColor);
         southPanel.setBackground(gridColor);
         scorePanel.setBackground(gridColor);
-        spacePanel.setBackground(gridColor);
 
-        //add(southPanel, BorderLayout.SOUTH);
         add(bottomPanel, BorderLayout.SOUTH);
         add(gridPanel, BorderLayout.CENTER);
 
@@ -80,9 +81,16 @@ public class GameGUI extends JFrame{
 
         scorePanel.add(p1ScoreLabel);
         scorePanel.add(p1ScoreCounter);
-        scorePanel.add(spacePanel);
+        scorePanel.add(spaceLabel);
         scorePanel.add(p2ScoreLabel);
         scorePanel.add(p2ScoreCounter);
+
+        p1ScoreLabel.setFont(font2);
+        p2ScoreLabel.setFont(font2);
+        p1ScoreCounter.setFont(font1);
+        p2ScoreCounter.setFont(font1);
+
+        p1ScoreLabel.setBounds(10,10,1,1);
 
         southPanel.add(southWestPanel, BorderLayout.WEST);
         southPanel.add(southEastPanel, BorderLayout.EAST);
