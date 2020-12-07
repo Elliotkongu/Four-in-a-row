@@ -13,9 +13,7 @@ public class EmptyTile extends Tile {
     public EmptyTile(Point position) {
         super(position);
     }
-    public EmptyTile(EmptyTile otherTile) {
-        super(otherTile.getPosition());
-    }
+
     @Override
     protected void paintComponent(Graphics g) {
         g.setColor(Color.BLACK);

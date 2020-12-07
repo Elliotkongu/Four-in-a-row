@@ -28,8 +28,10 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     public List<List<Tile>> tileList;
     private List<List<Tile>> undoList;
 
+    private TileFactory tileFactory;
 
     public GameBoard() {
+        tileFactory = new TileFactory(this);
         initiateTileList();
         initiateGUI();
     }
@@ -44,9 +46,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         for (int i = 0; i < ROWS; i++) {
             tileList.add(new ArrayList<>());
             for (int j = 0; j < COLUMNS; j++) {
-                Tile emptyTile = new EmptyTile(new Point(j, i));
-                emptyTile.addMouseListener(this);
-                tileList.get(i).add(emptyTile);
+                tileList.get(i).add(tileFactory.createEmptyTile(new Point(j, i)));
             }
         }
     }
@@ -65,9 +65,9 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         undoList = copyList(tileList);
         Tile tile;
         if (player == 0) {
-            tile = new PlayerTile(point, player1Color, player);
+            tile = tileFactory.createPlayerTile(point, player1Color, player);
         } else {
-            tile = new PlayerTile(point, player2Color, player);
+            tile = tileFactory.createPlayerTile(point, player2Color, player);
         }
 
 
@@ -285,10 +285,9 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             for (Tile tile : tiles) {
                 Tile tileCopy;
                 if (tile instanceof PlayerTile) {
-                    tileCopy = new PlayerTile((PlayerTile) tile);
+                    tileCopy = tileFactory.createPlayerTile(tile.getPosition(), ((PlayerTile) tile).getColor(), ((PlayerTile) tile).getPlayer());
                 } else {
-                    tileCopy = new EmptyTile((EmptyTile) tile);
-                    tileCopy.addMouseListener(this);
+                    tileCopy = tileFactory.createEmptyTile(tile.getPosition());
                 }
                 copyTileList.add(tileCopy);
             }
