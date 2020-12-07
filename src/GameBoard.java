@@ -23,6 +23,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     private Color player2Color = new Color(255, 255, 77);
 
     public List<List<Tile>> tileList;
+    private List<List<Tile>> undoList;
 
 
     public GameBoard() {
@@ -40,7 +41,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         for (int i = 0; i < ROWS; i++) {
             tileList.add(new ArrayList<>());
             for (int j = 0; j < COLUMNS; j++) {
-                Tile emptyTile = new EmptyTile(new Point(j, i), Color.BLACK);
+                Tile emptyTile = new EmptyTile(new Point(j, i));
                 emptyTile.addMouseListener(this);
                 tileList.get(i).add(emptyTile);
             }
@@ -58,6 +59,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     }
 
     public void placeTile(int player, Point point) {
+        undoList = copyList(tileList);
         Tile tile;
         if (player == 0) {
             tile = new PlayerTile(point, player1Color, player);
@@ -90,6 +92,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             gameRules();
             System.out.println("Rules have been shown");
         } else if (e.getSource() == gameGUI.undoButton) {
+            undo();
             System.out.println("Undo");
         } else if (e.getSource() == gameGUI.p1Color1) {
             player1Color = new Color(204, 6, 5);
@@ -112,7 +115,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         if (calculateHorizontal(currentPlayer) || calculateVertical(currentPlayer)
                 || calculateDiagonalSE(currentPlayer) || calculateDiagonalSW(currentPlayer)) {
             showMessageDialog(null, "Spelare " + currentPlayer + " vann!");
-            playAgain(currentPlayer);
+            playAgain();
 
         }
     }
@@ -245,16 +248,50 @@ public class GameBoard extends MouseAdapter implements ActionListener {
                 "Lycka till!", "Spelregler", INFORMATION_MESSAGE);
     }
 
-    public void playAgain(int player) {
+    public void playAgain() {
         int response = showConfirmDialog(gameGUI, "Spela igen?", "Rematch", YES_NO_OPTION, QUESTION_MESSAGE);
 
         if (response == YES_OPTION) {
             initiateTileList();
-            SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, player, player1Color));
+            SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, 3, Color.BLACK));
         }
         else {
             System.exit(1);
         }
+    }
+
+    public void undo() {
+        if (undoList == null) {
+            return;
+        }
+        tileList = copyList(undoList);
+        undoList = null;
+        SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, 1, player1Color));
+        if (currentPlayer == 1) {
+            currentPlayer = 2;
+        } else {
+            currentPlayer = 1;
+        }
+    }
+
+    private List<List<Tile>> copyList(List<List<Tile>> sourceList) {
+        List<List<Tile>> copy = new ArrayList<>();
+        List<Tile> copyTileList;
+        for (List<Tile> tiles : sourceList) {
+            copyTileList = new ArrayList<>();
+            for (Tile tile : tiles) {
+                Tile tileCopy;
+                if (tile instanceof PlayerTile) {
+                    tileCopy = new PlayerTile((PlayerTile) tile);
+                } else {
+                    tileCopy = new EmptyTile((EmptyTile) tile);
+                    tileCopy.addMouseListener(this);
+                }
+                copyTileList.add(tileCopy);
+            }
+            copy.add(copyTileList);
+        }
+        return copy;
     }
 
     public static void main(String[] args) {
