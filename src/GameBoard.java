@@ -112,7 +112,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         if (calculateHorizontal(currentPlayer) || calculateVertical(currentPlayer)
                 || calculateDiagonalSE(currentPlayer) || calculateDiagonalSW(currentPlayer)) {
             showMessageDialog(null, "Spelare " + currentPlayer + " vann!");
-            playAgain();
+            playAgain(currentPlayer);
 
         }
     }
@@ -245,11 +245,12 @@ public class GameBoard extends MouseAdapter implements ActionListener {
                 "Lycka till!", "Spelregler", INFORMATION_MESSAGE);
     }
 
-    public void playAgain() {
+    public void playAgain(int player) {
         int response = showConfirmDialog(null, "Spela igen?", "Rematch", YES_NO_OPTION, QUESTION_MESSAGE);
 
         if (response == YES_OPTION) {
             initiateTileList();
+            SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, player, player1Color));
         }
         else {
             System.exit(1);
