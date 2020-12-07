@@ -79,6 +79,10 @@ public class GameGUI extends JFrame{
         p2ColorButtongroup.add(p2Color2);
         p2ColorButtongroup.add(p2Color3);
 
+
+        p1Color1.setSelected(true);
+        p2Color1.setSelected(true);
+
         scorePanel.add(p1ScoreLabel);
         scorePanel.add(p1ScoreCounter);
         scorePanel.add(spaceLabel);

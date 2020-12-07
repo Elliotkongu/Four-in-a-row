@@ -20,6 +20,12 @@ public class PlayerTile extends Tile{
         this.color = color;
     }
 
+    public PlayerTile(PlayerTile otherTile) {
+        super(otherTile.getPosition());
+        this.player = otherTile.getPlayer();
+        this.color = otherTile.getColor();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         g.setColor(color);
