@@ -19,8 +19,8 @@ public class GameBoard extends MouseAdapter implements ActionListener {
 
     private GameGUI gameGUI;
     private int currentPlayer = 1;
-    private Color player1Color = Color.WHITE;
-    private Color player2Color = Color.WHITE;
+    private Color player1Color = new Color(204, 6, 5);
+    private Color player2Color = new Color(255, 255, 77);
 
     public List<List<Tile>> tileList;
 
