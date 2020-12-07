@@ -22,8 +22,8 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     private Color player1Color = Color.WHITE;
     private Color player2Color = Color.WHITE;
 
-    public int score = 0;
-    GameGUI gameGui;
+    public int p1Score = 0;
+    public int p2Score = 0;
 
     public List<List<Tile>> tileList;
 
@@ -111,7 +111,6 @@ public class GameBoard extends MouseAdapter implements ActionListener {
 
     public void calculateVictory(int currentPlayer) {
 
-        //horizontal
         if (calculateHorizontal(currentPlayer) || calculateVertical(currentPlayer)
                 || calculateDiagonalSE(currentPlayer) || calculateDiagonalSW(currentPlayer)) {
             showMessageDialog(null, "Spelare " + currentPlayer + " vann!");
@@ -263,13 +262,13 @@ public class GameBoard extends MouseAdapter implements ActionListener {
 
 
     public void winnerPoint (int player){
-        if (player == 0) {
-            score++;
-            gameGUI.p1ScoreCounter.setText(String.valueOf(score));
+        if (player == 1) {
+            p1Score++;
+            gameGUI.p1ScoreCounter.setText(String.valueOf(p1Score));
         }
         else {
-            score++;
-            gameGUI.p2ScoreCounter.setText(String.valueOf(score));
+            p2Score++;
+            gameGUI.p2ScoreCounter.setText(String.valueOf(p2Score));
         }
     }
 
