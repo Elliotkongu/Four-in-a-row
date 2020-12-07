@@ -239,14 +239,14 @@ public class GameBoard extends MouseAdapter implements ActionListener {
     }
 
     public void gameRules(){
-        showMessageDialog(null, "Spelare turas om att lägga en bricka per spelare.\n" +
+        showMessageDialog(gameGUI, "Spelare turas om att lägga en bricka per spelare.\n" +
                 "När en spelare får fyra brickor i sin egen färg irad, horisontellt, vertikalt eller diagonalt vinner den.\n" +
                 "Om det inte finns lediga platser och ingen har vunnit blir det oavgjort.\n\n" +
                 "Lycka till!", "Spelregler", INFORMATION_MESSAGE);
     }
 
     public void playAgain(int player) {
-        int response = showConfirmDialog(null, "Spela igen?", "Rematch", YES_NO_OPTION, QUESTION_MESSAGE);
+        int response = showConfirmDialog(gameGUI, "Spela igen?", "Rematch", YES_NO_OPTION, QUESTION_MESSAGE);
 
         if (response == YES_OPTION) {
             initiateTileList();
