@@ -42,10 +42,10 @@ public class GameGUI extends JFrame{
     public ButtonGroup p1ColorButtongroup = new ButtonGroup();
     public ButtonGroup p2ColorButtongroup = new ButtonGroup();
 
-    public JRadioButton p1Color1 = new JRadioButton("Rött");
+    public JRadioButton p1Color1 = new JRadioButton("Rött",true);
     public JRadioButton p1Color2 = new JRadioButton("Blå");
     public JRadioButton p1Color3 = new JRadioButton("Lila");
-    public JRadioButton p2Color1 = new JRadioButton("Gult");
+    public JRadioButton p2Color1 = new JRadioButton("Gult",true);
     public JRadioButton p2Color2 = new JRadioButton("Rosa");
     public JRadioButton p2Color3 = new JRadioButton("Grönt");
 

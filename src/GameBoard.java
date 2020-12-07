@@ -19,13 +19,21 @@ public class GameBoard extends MouseAdapter implements ActionListener {
 
     private GameGUI gameGUI;
     private int currentPlayer = 1;
-    private Color player1Color = Color.WHITE;
-    private Color player2Color = Color.WHITE;
 
     public int p1Score = 0;
     public int p2Score = 0;
 
     public List<List<Tile>> tileList;
+
+    private Color yellow = new Color(255, 255, 77);
+    private Color red = new Color(204, 6, 5);
+    private Color blue = new Color(0, 128, 255);
+    private Color purple = new Color(152, 68, 158);
+    private Color pink = new Color(245, 195, 194);
+    private Color green = new Color(11, 134, 55);
+
+    private Color player1Color = red;
+    private Color player2Color = yellow;
 
 
     public GameBoard() {
@@ -95,17 +103,17 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         } else if (e.getSource() == gameGUI.undoButton) {
             System.out.println("Undo");
         } else if (e.getSource() == gameGUI.p1Color1) {
-            player1Color = new Color(204, 6, 5);
+            player1Color = red;
         } else if (e.getSource() == gameGUI.p1Color2) {
-            player1Color = new Color(0, 128, 255);
+            player1Color = blue;
         } else if (e.getSource() == gameGUI.p1Color3) {
-            player1Color = new Color(152, 68, 158);
+            player1Color = purple;
         } else if (e.getSource() == gameGUI.p2Color1) {
-            player2Color = new Color(255, 255, 77);
+            player2Color = yellow;
         } else if (e.getSource() == gameGUI.p2Color2) {
-            player2Color = new Color(245, 195, 194);
+            player2Color = pink;
         } else if (e.getSource() == gameGUI.p2Color3) {
-            player2Color = new Color(11, 134, 55);
+            player2Color = green;
         }
     }
 
