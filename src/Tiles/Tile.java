@@ -21,8 +21,4 @@ public abstract class Tile extends JPanel {
         return position;
     }
 
-    public void setPosition(Point position) {
-        this.position = position;
-    }
-
 }
