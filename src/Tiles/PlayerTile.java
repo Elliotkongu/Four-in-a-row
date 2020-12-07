@@ -23,7 +23,7 @@ public class PlayerTile extends Tile{
     public PlayerTile(PlayerTile otherTile) {
         super(otherTile.getPosition());
         this.player = otherTile.getPlayer();
-        this.color = otherTile.color;
+        this.color = otherTile.getColor();
     }
 
     @Override
