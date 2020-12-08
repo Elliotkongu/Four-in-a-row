@@ -25,8 +25,7 @@ public class GameGUI extends JFrame{
     JPanel bottomPanel = new JPanel();
     JPanel scorePanel = new JPanel();
 
-    public JLabel scoreLabel = new JLabel();
-    public JLabel infoLabel = new JLabel();
+
     public JLabel p1ScoreLabel = new JLabel("SPELARE 1 :");
     public JLabel p2ScoreLabel = new JLabel("SPELARE 2 :");
     public JLabel p1ScoreCounter = new JLabel("0");
