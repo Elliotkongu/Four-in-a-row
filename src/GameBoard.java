@@ -120,11 +120,25 @@ public class GameBoard extends MouseAdapter implements ActionListener {
 
         if (calculateHorizontal(currentPlayer) || calculateVertical(currentPlayer)
                 || calculateDiagonalSE(currentPlayer) || calculateDiagonalSW(currentPlayer)) {
-            showMessageDialog(null, "Spelare " + currentPlayer + " vann!");
+            showMessageDialog(gameGUI, "Spelare " + currentPlayer + " vann!");
             playAgain();
-
             winnerPoint(currentPlayer);
+        }else if(calculateDraw()){
+            showMessageDialog(gameGUI, "Ingen spelare vann...");
+            playAgain();
         }
+    }
+
+    private boolean calculateDraw() {
+
+        for (int x = 0; x < COLUMNS; x++) {
+            for (int y = 0; y < ROWS; y++) {
+                if (tileList.get(y).get(x) instanceof EmptyTile) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private boolean calculateHorizontal(int player) {
