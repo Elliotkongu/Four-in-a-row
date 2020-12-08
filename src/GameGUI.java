@@ -120,6 +120,7 @@ public class GameGUI extends JFrame{
         p2Color2.addActionListener(al);
         p2Color3.addActionListener(al);
 
+        setTitle("Fyra-i-rad");
         setSize(600,600);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
