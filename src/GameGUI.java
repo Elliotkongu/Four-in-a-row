@@ -32,8 +32,8 @@ public class GameGUI extends JFrame{
     public JLabel p2ScoreCounter = new JLabel("0");
     public JLabel spaceLabel = new JLabel("   -   ");
 
-    Font font1 = new Font("SansSerif", Font.BOLD, 14);
-    Font font2 = new Font("SansSerif", Font.PLAIN, 14);
+    public Font font1 = new Font("SansSerif", Font.BOLD, 14);
+    public Font font2 = new Font("SansSerif", Font.PLAIN, 14);
 
     public JButton showRulesButton = new JButton("Spelregler");
     public JButton undoButton = new JButton("Ångra");
@@ -88,7 +88,7 @@ public class GameGUI extends JFrame{
         scorePanel.add(p2ScoreLabel);
         scorePanel.add(p2ScoreCounter);
 
-        p1ScoreLabel.setFont(font2);
+        p1ScoreLabel.setFont(font1);
         p2ScoreLabel.setFont(font2);
         p1ScoreCounter.setFont(font1);
         p2ScoreCounter.setFont(font1);
