@@ -70,7 +70,6 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             tile = tileFactory.createPlayerTile(point, player2Color, player);
         }
 
-
         for (int i = ROWS - 1; i >= 0; i--) {
             if (tileList.get(i).get(point.x) instanceof EmptyTile) {
                 tileList.get(i).set(point.x, tile);
@@ -81,10 +80,14 @@ public class GameBoard extends MouseAdapter implements ActionListener {
             SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, player, player1Color));
             calculateVictory(currentPlayer);
             currentPlayer = 2;
+            gameGUI.p1ScoreLabel.setFont(gameGUI.font2);
+            gameGUI.p2ScoreLabel.setFont(gameGUI.font1);
         } else {
             SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, player, player2Color));
             calculateVictory(currentPlayer);
             currentPlayer = 1;
+            gameGUI.p1ScoreLabel.setFont(gameGUI.font1);
+            gameGUI.p2ScoreLabel.setFont(gameGUI.font2);
         }
 
     }
@@ -110,6 +113,7 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         } else if (e.getSource() == gameGUI.p2Color3) {
             player2Color = new Color(11, 134, 55);
         }
+
     }
 
     public void calculateVictory(int currentPlayer) {
@@ -271,8 +275,12 @@ public class GameBoard extends MouseAdapter implements ActionListener {
         undoList = null;
         SwingUtilities.invokeLater(() -> gameGUI.refreshGameGrid(tileList, 1, player1Color));
         if (currentPlayer == 1) {
+            gameGUI.p1ScoreLabel.setFont(gameGUI.font2);
+            gameGUI.p2ScoreLabel.setFont(gameGUI.font1);
             currentPlayer = 2;
         } else {
+            gameGUI.p2ScoreLabel.setFont(gameGUI.font2);
+            gameGUI.p1ScoreLabel.setFont(gameGUI.font1);
             currentPlayer = 1;
         }
     }
